@@ -33,14 +33,16 @@ router.post('/signup', (req: Request, res: Response) => {
 
   const hash = bcryptjs.hashSync(password, 10);
   const id = uuid();
-  db.prepare('INSERT INTO users (id, name, email, password, position, approved) VALUES (?, ?, ?, ?, ?, 0)').run(id, name, email, hash, position || null);
+  db.prepare('INSERT INTO users (id, name, email, password, position, approved) VALUES (?, ?, ?, ?, ?, 1)').run(id, name, email, hash, position || null);
 
   // Create 6 default memos
   const colors = ['yellow', 'pink', 'blue', 'green', 'purple', 'orange'];
   const insertMemo = db.prepare('INSERT INTO memos (id, user_id, color, font) VALUES (?, ?, ?, ?)');
   colors.forEach(c => insertMemo.run(uuid(), id, c, 'pretendard-medium'));
 
-  res.json({ message: '관리자 승인 후 로그인이 가능합니다' });
+  // Auto-login after signup
+  const token = jwt.sign({ id, email, role: 'user' }, JWT_SECRET, { expiresIn: '7d' });
+  res.json({ token, user: { id, name, email, position: position || null, role: 'user' } });
 });
 
 // Sign in

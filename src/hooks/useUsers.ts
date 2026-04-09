@@ -26,7 +26,7 @@ export function useUsers(): UseUsersReturn {
     try {
       setLoading(true);
       const data = await api.get('/users');
-      setUsers(data.users || []);
+      setUsers(Array.isArray(data) ? data : (data.users || []));
     } catch (error) {
       console.error('Failed to fetch users:', error);
       setUsers([]);

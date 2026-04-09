@@ -82,9 +82,8 @@ export default function AuthPage() {
   const onSignupSubmit = async (data: SignupFormData) => {
     try {
       await signUp(data);
-      toast.success('관리자 승인 후 로그인이 가능합니다');
-      signupForm.reset();
-      setTab('login');
+      toast.success('가입 완료! 환영합니다');
+      navigate('/');
     } catch (error) {
       toast.error('회원가입에 실패했습니다');
     }

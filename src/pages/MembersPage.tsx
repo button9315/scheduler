@@ -95,15 +95,23 @@ export default function MembersPage() {
     }
   };
 
-  const handleToggleAdmin = async (userId: string, currentAdmin: boolean) => {
+  const handleToggleAdmin = async (userId: string) => {
     try {
-      await api.put(`/users/${userId}/admin`, {
-        isAdmin: !currentAdmin,
-      });
+      await api.post(`/users/${userId}/toggle-admin`);
       toast.success('관리자 권한이 업데이트되었습니다');
       await refetch();
     } catch (error) {
       toast.error('권한 업데이트 실패');
+    }
+  };
+
+  const handleApproveUser = async (userId: string) => {
+    try {
+      await api.post(`/users/${userId}/approve`);
+      toast.success('승인되었습니다');
+      await refetch();
+    } catch (error) {
+      toast.error('승인 실패');
     }
   };
 
@@ -123,12 +131,12 @@ export default function MembersPage() {
             key={user.id}
             user={user}
             isCurrentUser={user.id === currentUser?.id}
+            isAdminUser={currentUser?.role === 'admin'}
             projects={projects}
             onEdit={() => handleEditUser(user)}
             onDelete={() => setUserToDelete(user.id)}
-            onToggleAdmin={() =>
-              handleToggleAdmin(user.id, user.role === 'admin')
-            }
+            onToggleAdmin={() => handleToggleAdmin(user.id)}
+            onApprove={() => handleApproveUser(user.id)}
           />
         ))}
       </div>
@@ -232,22 +240,27 @@ export default function MembersPage() {
 interface MemberCardProps {
   user: any;
   isCurrentUser: boolean;
+  isAdminUser: boolean;
   projects: any[];
   onEdit: () => void;
   onDelete: () => void;
   onToggleAdmin: () => void;
+  onApprove: () => void;
 }
 
 function MemberCard({
   user,
   isCurrentUser,
+  isAdminUser,
   projects,
   onEdit,
   onDelete,
   onToggleAdmin,
+  onApprove,
 }: MemberCardProps) {
   const positionColor = POSITION_COLORS[user.position];
   const isAdmin = user.role === 'admin';
+  const isApproved = user.approved === 1 || user.approved === true;
 
   // Get active projects
   const activeProjects = projects
@@ -255,12 +268,12 @@ function MemberCard({
     .slice(0, 5);
 
   return (
-    <Card className="p-4 space-y-4">
+    <Card className={`p-4 space-y-4 ${!isApproved ? 'opacity-60 border-dashed border-yellow-400' : ''}`}>
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
           <h3 className="text-2xl font-bold">{user.name}</h3>
-          <div className="flex gap-2 mt-2">
+          <div className="flex gap-2 mt-2 flex-wrap">
             <Badge
               style={{
                 backgroundColor: positionColor,
@@ -271,12 +284,22 @@ function MemberCard({
               {user.position}
             </Badge>
             {isAdmin && <Badge variant="secondary">관리자</Badge>}
+            {!isApproved && (
+              <Badge variant="destructive" className="text-xs">
+                승인 대기
+              </Badge>
+            )}
           </div>
         </div>
+        {!isApproved && isAdminUser && (
+          <Button size="sm" onClick={onApprove} className="bg-green-600 hover:bg-green-700 text-white">
+            승인
+          </Button>
+        )}
       </div>
 
       {/* Admin Actions (Desktop) */}
-      {isCurrentUser && (
+      {isAdminUser && (
         <div className="hidden md:flex gap-2 pt-2">
           <Button
             size="sm"
@@ -293,8 +316,19 @@ function MemberCard({
             onClick={onToggleAdmin}
             className="flex-1"
           >
-            {isAdmin ? '관리자 취소' : '관리자'}
+            {isAdmin ? '관리자 취소' : '관리자 지정'}
           </Button>
+          {!isCurrentUser && (
+            <Button
+              size="sm"
+              variant="destructive"
+              onClick={onDelete}
+              className="flex-1"
+            >
+              <Trash2 className="w-3 h-3 mr-1" />
+              삭제
+            </Button>
+          )}
         </div>
       )}
 
@@ -351,7 +385,7 @@ function MemberCard({
       )}
 
       {/* Mobile Actions */}
-      {isCurrentUser && (
+      {isAdminUser && (
         <div className="flex gap-2 md:hidden pt-2 border-t">
           <Button
             size="sm"
@@ -363,12 +397,22 @@ function MemberCard({
           </Button>
           <Button
             size="sm"
-            variant="destructive"
-            onClick={onDelete}
+            variant="outline"
+            onClick={onToggleAdmin}
             className="flex-1"
           >
-            <Trash2 className="w-3 h-3" />
+            {isAdmin ? '관리자 취소' : '관리자'}
           </Button>
+          {!isCurrentUser && (
+            <Button
+              size="sm"
+              variant="destructive"
+              onClick={onDelete}
+              className="flex-1"
+            >
+              <Trash2 className="w-3 h-3" />
+            </Button>
+          )}
         </div>
       )}
     </Card>
