@@ -38,7 +38,7 @@ export function useMemos(): UseMemosReturn {
     try {
       setLoading(true);
       const data = await api.get('/memos');
-      setMemos(data.memos || []);
+      setMemos(Array.isArray(data) ? data : (data.memos || []));
     } catch (error) {
       console.error('Failed to fetch memos:', error);
       setMemos([]);

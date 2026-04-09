@@ -37,7 +37,7 @@ export function useSchedules(): UseSchedulesReturn {
     try {
       setLoading(true);
       const data = await api.get('/schedules');
-      setSchedules(data.schedules || []);
+      setSchedules(Array.isArray(data) ? data : (data.schedules || []));
     } catch (error) {
       console.error('Failed to fetch schedules:', error);
       setSchedules([]);

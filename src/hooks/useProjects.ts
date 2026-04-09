@@ -37,7 +37,7 @@ export function useProjects(): UseProjectsReturn {
     try {
       setLoading(true);
       const data = await api.get('/projects');
-      setProjects(data.projects || []);
+      setProjects(Array.isArray(data) ? data : (data.projects || []));
     } catch (error) {
       console.error('Failed to fetch projects:', error);
       setProjects([]);

@@ -24,7 +24,8 @@ export function useBookmarks(): UseBookmarksReturn {
     try {
       setLoading(true);
       const data = await api.get('/bookmarks');
-      setBookmarks(new Set(data.bookmarks || []));
+      const list = Array.isArray(data) ? data.map((b: any) => b.schedule_id) : (data.bookmarks || []);
+      setBookmarks(new Set(list));
     } catch (error) {
       console.error('Failed to fetch bookmarks:', error);
       setBookmarks(new Set());

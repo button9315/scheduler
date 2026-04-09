@@ -28,7 +28,7 @@ export function useFilterFavorites(): UseFilterFavoritesReturn {
 
     try {
       const data = await api.get('/filter-favorites');
-      setFavorites(data.favorites || []);
+      setFavorites(Array.isArray(data) ? data : (data.favorites || []));
     } catch (error) {
       console.error('Failed to fetch filter favorites:', error);
       setFavorites([]);
