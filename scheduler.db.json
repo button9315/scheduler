@@ -1,0 +1,97 @@
+{
+  "users": [
+    {
+      "id": "admin-001",
+      "name": "관리자",
+      "email": "admin@scheduler.com",
+      "password": "$2b$10$l242BrzmB3c2sSX1cgLAoe.uW//zxvz1G8LYVhrsW04Ceqeo5aCAi",
+      "position": "부서장",
+      "approved": 1,
+      "role": "admin",
+      "created_at": "2026-04-08T01:17:07.799Z",
+      "updated_at": "2026-04-08T01:17:07.800Z"
+    }
+  ],
+  "projects": [],
+  "projectAssignments": [],
+  "projectPhases": [],
+  "projectSchedules": [],
+  "schedules": [],
+  "scheduleBookmarks": [],
+  "scheduleFilterFavorites": [],
+  "feedbacks": [],
+  "memos": [
+    {
+      "id": "54wqg3x7rovkhwz9j4",
+      "user_id": "admin-001",
+      "title": "",
+      "content": "",
+      "color": "yellow",
+      "font": "pretendard-medium",
+      "font_size": "medium",
+      "font_color": "black",
+      "created_at": "2026-04-08T01:17:07.800Z",
+      "updated_at": "2026-04-08T01:17:07.800Z"
+    },
+    {
+      "id": "2aky0k01h4r0phh1ph",
+      "user_id": "admin-001",
+      "title": "",
+      "content": "",
+      "color": "pink",
+      "font": "pretendard-medium",
+      "font_size": "medium",
+      "font_color": "black",
+      "created_at": "2026-04-08T01:17:07.800Z",
+      "updated_at": "2026-04-08T01:17:07.800Z"
+    },
+    {
+      "id": "nsl8md2whl14fj4ma2",
+      "user_id": "admin-001",
+      "title": "",
+      "content": "",
+      "color": "blue",
+      "font": "pretendard-medium",
+      "font_size": "medium",
+      "font_color": "black",
+      "created_at": "2026-04-08T01:17:07.800Z",
+      "updated_at": "2026-04-08T01:17:07.800Z"
+    },
+    {
+      "id": "bdk5cl6bgg7vstkc16",
+      "user_id": "admin-001",
+      "title": "",
+      "content": "",
+      "color": "green",
+      "font": "pretendard-medium",
+      "font_size": "medium",
+      "font_color": "black",
+      "created_at": "2026-04-08T01:17:07.800Z",
+      "updated_at": "2026-04-08T01:17:07.800Z"
+    },
+    {
+      "id": "h4pcivry2ru0xuoajq",
+      "user_id": "admin-001",
+      "title": "",
+      "content": "",
+      "color": "purple",
+      "font": "pretendard-medium",
+      "font_size": "medium",
+      "font_color": "black",
+      "created_at": "2026-04-08T01:17:07.800Z",
+      "updated_at": "2026-04-08T01:17:07.800Z"
+    },
+    {
+      "id": "yad4rnzbwrvh5sq3fn",
+      "user_id": "admin-001",
+      "title": "",
+      "content": "",
+      "color": "orange",
+      "font": "pretendard-medium",
+      "font_size": "medium",
+      "font_color": "black",
+      "created_at": "2026-04-08T01:17:07.800Z",
+      "updated_at": "2026-04-08T01:17:07.800Z"
+    }
+  ]
+}

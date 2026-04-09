@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Pretendard:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css');
+@import url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/Paperlogy.css');
+@import "tailwindcss";
+
+:root {
+  --background: 220 20% 98%;
+  --foreground: 220 25% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 25% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 25% 10%;
+  --primary: 245 85% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 15% 94%;
+  --secondary-foreground: 220 25% 20%;
+  --muted: 220 15% 94%;
+  --muted-foreground: 220 10% 45%;
+  --accent: 245 85% 60%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 75% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 15% 90%;
+  --input: 220 15% 90%;
+  --ring: 245 85% 60%;
+  --radius: 0.75rem;
+  --sidebar-background: 245 25% 22%;
+  --sidebar-foreground: 220 15% 92%;
+  --sidebar-primary: 245 85% 70%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 245 25% 30%;
+  --sidebar-accent-foreground: 220 15% 95%;
+  --sidebar-border: 245 20% 28%;
+  --sidebar-ring: 245 85% 70%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  margin: 0;
+}
+
+.font-pretendard {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.glass {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.card-hover {
+  transition: all 300ms;
+}
+.card-hover:hover {
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  transform: translateY(-4px);
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.3); }
